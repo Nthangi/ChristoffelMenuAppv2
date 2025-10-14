@@ -1,222 +1,267 @@
- Christoffel's Menu App
-A modern, multi-screen React Native restaurant menu management application built with Expo and TypeScript. This app allows restaurant staff to efficiently manage their menu with an intuitive and beautiful interface.
+Christoffel's Menu App - Multi-Screen Version 
 
+Overview 
 
-App Preview
-Home Screen	Add Dish Screen	Menu List Screen
-https://via.placeholder.com/300x600/3498db/ffffff?text=Home+Screen	https://via.placeholder.com/300x600/2ecc71/ffffff?text=Add+Dish	https://via.placeholder.com/300x600/e74c3c/ffffff?text=Menu+List
-Features
-Multi-Screen Navigation - Smooth transitions between Home, Add Dish, and Menu List screens
+This is a React Native app built with Expo that allows users to manage a restaurant menu across multiple screens. Users can add, view, and remove dishes from a restaurant's's menu. Each dish includes a name, description, course type (Starter, Main, Dessert), and price. 
 
-Real-time Statistics - Automatic calculation of totals and average prices per course
+New Features (Multi-Screen Version) 
 
-Smart Validation - Comprehensive form validation with user-friendly error messages
+Home Screen: Welcome page with navigation to other screens 
 
-Beautiful UI - Professional design with card layouts and modern styling
+Add Dish Screen: Form to add new menu items with validation 
 
-Cross-Platform - Works seamlessly on web, iOS, and Android
+Menu List Screen: View all dishes with remove functionality 
 
-Type Safety - Built with TypeScript for better development experience
+Navigation: Smooth screen transitions using React Navigation 
 
-Quick Start
-Prerequisites
-Node.js 14+
+State Management: Shared state across all screens 
 
-npm or yarn
+Responsive Design: Works on web, iOS, and Android 
 
-Expo CLI
+App Calculates: 
 
-Installation
-Clone the repository
+The total number of menu items 
 
-bash
-git clone https://github.com/Nthangi/ChristoffelMenuApp.git
-cd ChristoffelMenuApp
-Install dependencies
+The average price for each course category 
 
-bash
-npm install
-Install Expo and navigation packages
+Real-time updates across all screens 
 
-bash
-npx expo install react-native-screens react-native-safe-area-context
-npm install @react-navigation/native @react-navigation/native-stack
-npm install @react-native-picker/picker
-Start the development server
+Technologies Used 
 
-bash
-npx expo start
-Run on your preferred platform
+React Native - Cross-platform mobile framework 
 
-Press w for web
+Expo - Development platform for React Native 
 
-Press a for Android
+TypeScript - Type-safe JavaScript 
 
-Press i for iOS
+React Hooks (useState) - State management 
 
-Scan QR code with Expo Go app (mobile)
+React Navigation - Screen navigation and routing 
 
-Project Structure
-text
-ChristoffelMenuApp/
-├── App.tsx                 # Main application with navigation setup
-├── index.tsx              # Application entry point
-├── package.json           # Dependencies and scripts
-├── tsconfig.json          # TypeScript configuration
-├── app.json              # Expo configuration
-└── screens/              # Application screens
-    ├── HomeScreen.tsx     # Dashboard with statistics
-    ├── AddDishScreen.tsx  # Add new dish form
-    └── MenuListScreen.tsx # Menu items management
-How to Use
-1. Home Screen
-View total menu items count
+@react-native-picker/picker - Course selection component 
 
-See average prices for Starters, Mains, and Desserts
+How It Works 
 
-Navigate to Add Dish or Menu List screens
+Home Screen: Users start here and can navigate to Add Dish or View Menu 
 
-2. Add Dish Screen
-Fill in dish details:
+Add Dish Screen:  
 
-Name (required)
+User fills in Dish Name, Description, Course, and Price 
 
-Description (required)
+App validates all inputs 
 
-Course type (Starter, Main, or Dessert)
+On clicking "Add Dish", item is saved and user returns to Home 
 
-Price (required, must be positive number)
+Menu List Screen: 
 
-Submit with validation
+Displays all added dishes in a scrollable list 
 
-Success confirmation with auto-navigation
+Each dish shows name, price, description, course, and remove option 
 
-3. Menu List Screen
-View all dishes in beautiful cards
+Remove function with confirmation alert 
 
-Each card shows:
+State Management: Menu items are shared across all screens using React state 
 
-Dish name and price
+Updated Project Structure 
 
-Description
+ChristoffelMenuApp/ 
+│ 
+├── App.tsx (Main navigation setup) 
+├── index.tsx (App entry point) 
+├── app.json (Expo configuration) 
+├── tsconfig.json (TypeScript configuration) 
+├── package.json (Dependencies) 
+├── node_modules/ (Installed packages) 
+├── assets/ (Images and icons) 
+└── screens/ 
+   ├── HomeScreen.tsx (Welcome and navigation) 
+   ├── AddDishScreen.tsx (Add new items form) 
+   └── MenuListScreen.tsx (View and manage menu) 
+ 
 
-Course type
+Technical Implementation 
 
-Remove button
+Navigation Setup 
 
-Remove items with confirmation dialog
+The app uses React Navigation's Native Stack Navigator to manage screen transitions: 
 
-Empty state guidance
+HomeScreen: Initial route with welcome message and navigation buttons 
 
-🛠 Technologies Used
-Frontend Framework: React Native
+AddDishScreen: Form screen for adding new menu items 
 
-Development Platform: Expo
+MenuListScreen: Display screen for viewing and removing items 
 
-Language: TypeScript
+State Management 
 
-Navigation: React Navigation v6
+Shared State: Menu items array is managed in App.tsx and passed to all screens 
 
-UI Components: React Native + StyleSheet
+Real-time Updates: Changes in one screen immediately reflect in others 
 
-State Management: React useState
+Type Safety: TypeScript interfaces ensure data consistency 
 
-Form Handling: Controlled components with validation
+Screen Components 
 
-📊 Features in Detail
-🏠 Home Screen Features
-Real-time menu statistics
+HomeScreen 
 
-Quick action buttons
+Displays total menu items count 
 
-Professional dashboard design
+Navigation buttons to Add Dish and View Menu screens 
 
-Responsive layout
+Clean, welcoming interface 
 
- Add Dish Screen Features
-Comprehensive form validation
+AddDishScreen 
 
-Course selection picker
+Form validation for all fields 
 
-Price formatting
+Course selection using Picker component 
 
-Success/error feedback
+Price validation and formatting 
 
-Cancel option
+Success feedback with alerts 
 
- Menu List Screen Features
-Efficient FlatList rendering
+MenuListScreen 
 
-Beautiful card design
+FlatList for efficient rendering 
 
-Safe delete with confirmation
+Remove functionality with confirmation 
 
-Empty state handling
+Card-based layout for each menu item 
 
-Smooth scrolling
+Empty state handling 
 
-Design System
-Color Palette
-css
-Primary: #3498db (Blue)
-Success: #2ecc71 (Green)
-Danger: #e74c3c (Red)
-Background: #fff8f0 (Cream)
-Text: #2c3e50 (Dark Gray)
-Typography
-Headers: Bold, large text
+Styling 
 
-Body: Readable medium text
+Consistent Theme: Soft cream background (#fff8f0) across all screens 
 
-Labels: Semi-bold for form elements
+Professional Colors: Blue primary buttons (#0a84ff), complementary accents 
 
-Interactive: Bold for buttons
+Card Design: Clean white cards with subtle borders for menu items 
 
-Development
-Running Tests
-bash
-npm test
-Building for Production
-bash
-expo build:android
-expo build:ios
-Code Quality
-TypeScript for type safety
+Responsive Layout: Flexbox-based design that works on all screen sizes 
 
-Consistent code formatting
+Typography: Clear hierarchy with bold headers and readable body text 
 
-Component-based architecture
+Multi-Platform Support 
 
-Proper error handling
+Web: Fully functional in web browsers 
 
-Contributing
-We welcome contributions! Please feel free to submit issues and enhancement requests.
+iOS: Native iOS styling and interactions 
 
-Fork the project
+Android: Native Android compatibility 
 
-Create your feature branch (git checkout -b feature/AmazingFeature)
+Data Flow 
 
-Commit your changes (git commit -m 'Add some AmazingFeature')
+State Initialization: Empty menu items array in App.tsx 
 
-Push to the branch (git push origin feature/AmazingFeature)
+Adding Items: AddDishScreen validates and adds to global state 
 
-Open a Pull Request
+Viewing Items: MenuListScreen displays current state 
 
-License
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+Removing Items: Filter operation updates global state 
 
-Author
-Nthangene Ndlovu
+Navigation: Seamless transitions between screens with preserved state 
 
-Student Number: ST10492130
+Getting Started 
 
-Institution: The Independent Institute of Education
+# Install dependencies 
+npm install 
+ 
+# Start the development server 
+npx expo start 
+ 
+# Run on web 
+Press 'w' in the terminal 
+ 
+# Run on Android/iOS 
+Press 'a' or 'i' in the terminal 
+ 
 
-GitHub: @Nthangi
+App Screens 
 
+Home Screen: Welcome page with navigation 
 
+ 
 
-🔗 Links
-YOUTUBE VIEDO:
+Add Dish Screen: Form with input fields and course picker 
 
+ 
 
+Menu List Screen: Scrollable list of menu items with remove options 
+
+ 
+
+Validation Features 
+
+Required field checking 
+
+Price validation (must be number > 0) 
+
+Course selection enforcement 
+
+Success/error feedback with alerts 
+
+Conclusion 
+
+This multi-screen version demonstrates advanced React Native concepts including: 
+
+Navigation between multiple screens 
+
+Shared state management across components 
+
+Form handling with validation 
+
+TypeScript integration for type safety 
+
+Professional UI/UX with consistent styling 
+
+The app provides a complete CRUD (Create, Read, Update, Delete) experience for menu management in a restaurant setting. 
+
+ 
+
+Links 
+
+GitHub Repository: https://github.com/Nthangi/ChristoffelMenuApp 
+
+YouTube Video:  
+
+Author 
+
+Name: Nthangene Ndlovu 
+
+Student Number: ST10492130 
+
+Institution: The Independent Institute of Education 
+
+Date: 14 October 2025  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+References 
+
+React Native (2025) React Native documentation. Available at: https://reactnative.dev/docs [Accessed: 14 October 2025] 
+
+Expo (2025) Expo documentation. Available at: https://docs.expo.dev/ [Accessed: 14 October 2025] 
+
+React (2025) React documentation. Available at: https://react.dev/ [Accessed: 14 October 2025] 
+
+React Navigation (2025) React Navigation documentation. Available at: https://reactnavigation.org/ [Accessed: 14 October 2025] 
+
+React Native Picker (2025) React Native Picker component documentation. Available at: https://github.com/react-native-picker/picker [Accessed: 14 October 2025] 
+
+Stack Overflow (2025) Developer Q&A site. Available at: https://stackoverflow.com/ [Accessed: 14 October 2025] 
+
+Mozilla Developer Network (2025) JavaScript reference and documentation. Available at: https://developer.mozilla.org/ [Accessed: 14 October 2025] 
+
+ 
