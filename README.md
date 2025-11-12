@@ -173,20 +173,9 @@ npx expo start
 Press 'w' in the terminal 
  
 # Run on Android/iOS 
-Press 'a' or 'i' in the terminal 
+Press 'a' or 'i' in the terminal
  
 
-App Screens 
-
-Home Screen: Welcome page with navigation 
-
- 
-
-Add Dish Screen: Form with input fields and course picker 
-
- 
-
-Menu List Screen: Scrollable list of menu items with remove options 
 
  
 
@@ -220,7 +209,6 @@ The app provides a complete CRUD (Create, Read, Update, Delete) experience for m
 
 Links 
 
-GitHub Repository: https://github.com/Nthangi/ChristoffelMenuApp 
 
 YouTube Video:  
 
@@ -234,7 +222,53 @@ Institution: The Independent Institute of Education
 
 Date: 14 October 2025  
 
- 
+ # ChristoffelMenuApp – Final PoE Submission
+
+A simple **menu management app** built with **Expo** and **React Native**, allowing users to browse, add, and remove dishes.
+
+---
+
+## Features Implemented
+
+- Add a new dish with a name, description, course, and price
+- Remove a dish with confirmation
+- Real-time UI updates using React state
+- Handles empty input gracefully
+- Works on iOS, Android, and Web
+
+---
+
+## 📜 Change Log
+
+### Changes since Part 2
+
+1. **Dish Removal Bug Fix**
+   - Fixed issue where dishes could not be removed from the menu.
+   - Updated `setMenuItems` to use the **functional state update**:
+     ```ts
+     setMenuItems(prevMenuItems => prevMenuItems.filter(item => item.id !== id))
+     ```
+     ensuring the latest state is always used.
+     
+2. **UI Enhancements**
+   - Added card styling for each dish.
+   - Added “No dishes available” message when the list is empty.
+   - Styled the remove button for better visibility.
+
+3. **Input Validation**
+   - Added check to prevent adding empty dish names.
+
+4. **Refactoring**
+   - Converted all `setMenuItems` calls to functional updates for consistent state management.
+   - Simplified `FlatList` rendering for readability.
+   - Extracted reusable styles into a `StyleSheet` object.
+   - Updated TypeScript types for props and `MenuItem`.
+
+---
+
+## 🗂 Project Structure
+
+
 
  
 
