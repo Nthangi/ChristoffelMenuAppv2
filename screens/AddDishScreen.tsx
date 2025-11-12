@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
+import { MenuItem } from '../types';
+import { validateMenuItem } from '../utils/menuCalculations';
 
-type MenuItem = {
-  id: string;
-  name: string;
-  description: string;
-  course: 'Starter' | 'Main' | 'Dessert';
-  price: number;
-};
-
-type Props = {
-  navigation: any;
+type Props = NativeStackScreenProps<RootStackParamList, 'AddDish'> & {
   setMenuItems: React.Dispatch<React.SetStateAction<MenuItem[]>>;
 };
 
@@ -22,149 +24,122 @@ export default function AddDishScreen({ navigation, setMenuItems }: Props) {
   const [price, setPrice] = useState('');
 
   const handleAddDish = () => {
-    if (!name.trim()) {
-      Alert.alert('Error', 'Please enter a dish name');
-      return;
-    }
-    if (!description.trim()) {
-      Alert.alert('Error', 'Please enter a description');
-      return;
-    }
-    if (!price.trim() || isNaN(parseFloat(price)) || parseFloat(price) <= 0) {
-      Alert.alert('Error', 'Please enter a valid price');
-      return;
-    }
+    const error = validateMenuItem(name, description, price);
+    if (error) return Alert.alert('Error', error);
 
-    const newItem: MenuItem = {
+    const newDish: MenuItem = {
       id: Date.now().toString(),
-      name: name.trim(),
-      description: description.trim(),
+      name,
+      description,
       course,
-      price: parseFloat(parseFloat(price).toFixed(2)),
+      price: parseFloat(price),
     };
 
-    setMenuItems(prev => [...prev, newItem]);
-    
-    Alert.alert('Success', 'Dish added successfully!', [
-      { text: 'OK', onPress: () => navigation.navigate('Home') }
-    ]);
+    setMenuItems(prev => [...prev, newDish]);
+    Alert.alert('✅ Success', `${name} added successfully!`);
+    navigation.goBack();
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Add New Dish</Text>
-      
+    <View style={styles.container}>
+      <Text style={styles.header}>➕ Add New Dish</Text>
+
+      {/* Dish Name */}
       <Text style={styles.label}>Dish Name</Text>
       <TextInput
         style={styles.input}
+        placeholder="Enter dish name"
         value={name}
         onChangeText={setName}
-        placeholder="Enter dish name"
       />
 
+      {/* Description */}
       <Text style={styles.label}>Description</Text>
       <TextInput
-        style={[styles.input, styles.textArea]}
+        style={[styles.input, { height: 80 }]}
+        placeholder="Enter description"
         value={description}
         onChangeText={setDescription}
-        placeholder="Enter description"
         multiline
-        numberOfLines={4}
       />
 
-      <Text style={styles.label}>Course Type</Text>
+      {/* Course Picker */}
+      <Text style={styles.label}>Select Course</Text>
       <View style={styles.pickerContainer}>
         <Picker
           selectedValue={course}
-          onValueChange={(itemValue) => setCourse(itemValue)}
-        >
+          onValueChange={(itemValue) =>
+            setCourse(itemValue as 'Starter' | 'Main' | 'Dessert')
+          }>
           <Picker.Item label="Starter" value="Starter" />
-          <Picker.Item label="Main Course" value="Main" />
+          <Picker.Item label="Main" value="Main" />
           <Picker.Item label="Dessert" value="Dessert" />
         </Picker>
       </View>
 
+      {/* Price */}
       <Text style={styles.label}>Price (R)</Text>
       <TextInput
         style={styles.input}
+        placeholder="Enter price"
         value={price}
         onChangeText={setPrice}
-        placeholder="0.00"
-        keyboardType="decimal-pad"
+        keyboardType="numeric"
       />
 
-      <TouchableOpacity style={styles.addButton} onPress={handleAddDish}>
-        <Text style={styles.addButtonText}>Add to Menu</Text>
+      {/* Submit Button */}
+      <TouchableOpacity style={styles.button} onPress={handleAddDish}>
+        <Text style={styles.buttonText}>Add Dish</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.backButtonText}>Cancel</Text>
-      </TouchableOpacity>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff8f0',
     padding: 20,
+    backgroundColor: '#fff8f0',
   },
-  title: {
-    fontSize: 24,
+  header: {
+    fontSize: 26,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
     color: '#2c3e50',
   },
   label: {
     fontSize: 16,
     fontWeight: '600',
-    marginBottom: 8,
     color: '#2c3e50',
+    marginBottom: 6,
   },
   input: {
-    backgroundColor: 'white',
     borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 20,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    padding: 10,
     fontSize: 16,
-  },
-  textArea: {
-    height: 100,
-    textAlignVertical: 'top',
+    backgroundColor: '#fff',
+    marginBottom: 16,
   },
   pickerContainer: {
-    backgroundColor: 'white',
     borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    marginBottom: 20,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    marginBottom: 16,
     overflow: 'hidden',
   },
-  addButton: {
-    backgroundColor: '#3498db',
+  button: {
+    backgroundColor: '#27ae60',
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 10,
     alignItems: 'center',
-    marginBottom: 12,
+    marginTop: 10,
   },
-  addButtonText: {
+  buttonText: {
     color: 'white',
-    fontSize: 16,
     fontWeight: 'bold',
-  },
-  backButton: {
-    backgroundColor: '#95a5a6',
-    padding: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  backButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 18,
   },
 });
